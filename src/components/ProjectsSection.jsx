@@ -1,12 +1,12 @@
 import React, { useEffect, useRef } from 'react';
 import { PROJECTS_DATA } from '../data/portfolioData';
-import { ExternalLink, Layers } from 'lucide-react';
+import { ExternalLink } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-export const ProjectsSection = ({ onOpenDetails }) => {
+export const ProjectsSection = () => {
   const sectionRef = useRef(null);
 
   useEffect(() => {
@@ -93,23 +93,16 @@ export const ProjectsSection = ({ onOpenDetails }) => {
               </div>
             </div>
 
-            <div className="p-5 pt-0 flex items-center gap-2">
+            <div className="p-5 pt-0">
               <a
                 href={project.demoUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 py-2 px-3 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-medium transition-all duration-200 flex items-center justify-center gap-1.5 shadow-md shadow-indigo-600/10 hover:shadow-indigo-600/30 active:scale-95"
+                className="w-full py-2.5 px-3 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-medium transition-all duration-200 flex items-center justify-center gap-1.5 shadow-md shadow-indigo-600/10 hover:shadow-indigo-600/30 active:scale-95 cursor-pointer"
               >
                 <ExternalLink className="w-3.5 h-3.5" />
                 <span>Live Demo</span>
               </a>
-              <button
-                onClick={() => onOpenDetails(project)}
-                className="flex-1 py-2 px-3 rounded-lg border border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-medium transition-all duration-200 flex items-center justify-center gap-1.5 active:scale-95"
-              >
-                <Layers className="w-3.5 h-3.5" />
-                <span>Details</span>
-              </button>
             </div>
           </div>
         ))}

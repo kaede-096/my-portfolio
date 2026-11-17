@@ -3,7 +3,7 @@ import { Mail, ArrowRight, Sun, Moon, Download, Globe } from 'lucide-react';
 import gsap from 'gsap';
 import katImage from '../assets/kat.png';
 
-export const Hero = ({ onOpenContact, isDarkMode, onToggleTheme }) => {
+export const Hero = ({ onOpenContact, onOpenResume, isDarkMode, onToggleTheme }) => {
   const containerRef = useRef(null);
 
   useEffect(() => {
@@ -33,25 +33,23 @@ export const Hero = ({ onOpenContact, isDarkMode, onToggleTheme }) => {
         <div className="flex items-center gap-3">
           <button
             onClick={onToggleTheme}
-            className="p-2 rounded-lg border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all duration-200 hover:scale-105"
+            className="p-2 rounded-lg border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all duration-200 hover:scale-105 cursor-pointer"
             aria-label="Toggle Theme"
           >
             {isDarkMode ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-slate-700" />}
           </button>
           
-          <a
-            href="/resume.pdf"
-            download="Katrina_Lyn_De_Asis_CV.pdf"
-            className="px-3 py-1.5 text-xs font-mono rounded-lg border border-indigo-200 dark:border-indigo-900 bg-indigo-50 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-300 hover:bg-indigo-100 dark:hover:bg-indigo-900/60 transition-all duration-200 flex items-center gap-1.5 hover:scale-105"
+          <button
+            onClick={onOpenResume}
+            className="px-3 py-1.5 text-xs font-mono rounded-lg border border-indigo-200 dark:border-indigo-900 bg-indigo-50 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-300 hover:bg-indigo-100 dark:hover:bg-indigo-900/60 transition-all duration-200 flex items-center gap-1.5 hover:scale-105 cursor-pointer"
           >
             <Download className="w-3.5 h-3.5" />
             <span>CV / Resume</span>
-          </a>
+          </button>
         </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-        {/* Kaliwang Bahagi: Main Intro */}
         <div className="lg:col-span-7 space-y-6">
           <div className="gsap-hero-item inline-flex items-center gap-2 px-3 py-1 rounded-full border border-slate-200 dark:border-slate-800 bg-white/60 dark:bg-slate-900/60 text-xs font-mono text-slate-600 dark:text-slate-400">
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
@@ -66,7 +64,7 @@ export const Hero = ({ onOpenContact, isDarkMode, onToggleTheme }) => {
           <div className="gsap-hero-item flex flex-wrap items-center gap-4 pt-2">
             <button
               onClick={onOpenContact}
-              className="px-6 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-medium text-sm transition-all duration-200 flex items-center gap-2 shadow-lg shadow-indigo-600/20 hover:scale-105 active:scale-95"
+              className="px-6 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-medium text-sm transition-all duration-200 flex items-center gap-2 shadow-lg shadow-indigo-600/20 hover:scale-105 active:scale-95 cursor-pointer"
             >
               <span>Get in Touch</span>
               <ArrowRight className="w-4 h-4" />
@@ -82,7 +80,10 @@ export const Hero = ({ onOpenContact, isDarkMode, onToggleTheme }) => {
                 <span>GitHub</span>
               </a>
               <a
-                href="mailto:katrinalyndeasis@gmail.com"
+                href="https://mail.google.com/mail/?view=cm&fs=1&to=katrinalyndeasis@gmail.com"
+                target="_blank"
+                rel="noreferrer"
+                title="Send Email via Gmail"
                 className="p-3 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all duration-200 hover:scale-105"
               >
                 <Mail className="w-5 h-5" />
@@ -91,7 +92,6 @@ export const Hero = ({ onOpenContact, isDarkMode, onToggleTheme }) => {
           </div>
         </div>
 
-        {/* Kanang Bahagi: Profile Card (Larawan sa Itaas, Texts sa Baba, Walang Hover) */}
         <div className="lg:col-span-5 flex justify-center gsap-hero-card">
           <div className="w-full max-w-sm rounded-2xl border border-slate-200 dark:border-slate-800 bg-gradient-to-br from-indigo-500/10 via-purple-500/10 to-transparent p-5 shadow-xl flex flex-col space-y-4">
             <div className="w-full aspect-[4/3] rounded-xl overflow-hidden border border-slate-200/80 dark:border-slate-700/80 shadow-md bg-slate-100 dark:bg-slate-900">

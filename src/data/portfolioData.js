@@ -15,7 +15,7 @@ export const PROJECTS_DATA = [
       challenge: "Maintaining optimal load speed, responsive styling, and routing in production.",
       solution: "Optimized asset bundling and configured Tailwind CSS for fluid console-like UI experiences."
     },
-    demoUrl: "https://my-playstation-l6ytgel3m-kaedes-projects-a043fb79.vercel.app/"
+    demoUrl: "https://my-playstation-app.vercel.app/"
   },
   {
     id: 2,

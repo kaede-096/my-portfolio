@@ -1,21 +1,47 @@
-import React, { useEffect, useRef } from 'react';
-import { Mail, Phone, Globe } from 'lucide-react';
+import React, { useEffect, useRef, useState } from 'react';
+import { Mail, Phone, Globe, Copy, Check } from 'lucide-react';
 import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export const ContactSection = () => {
   const sectionRef = useRef(null);
+  const [copied, setCopied] = useState(false);
+
+  const emailAddress = 'katrinalyndeasis@gmail.com';
+  const gmailComposeUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${emailAddress}`;
 
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.fromTo(
         '.gsap-contact-card',
         { opacity: 0, y: 30 },
-        { opacity: 1, y: 0, duration: 0.6, stagger: 0.15, ease: 'power2.out' }
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          stagger: 0.15,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top 80%',
+            once: true,
+          },
+        }
       );
     }, sectionRef);
 
     return () => ctx.revert();
   }, []);
+
+  const handleCopyEmail = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    navigator.clipboard.writeText(emailAddress);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
   return (
     <section ref={sectionRef} id="contact" className="py-16 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto border-t border-slate-200/60 dark:border-slate-800/60">
@@ -32,19 +58,33 @@ export const ContactSection = () => {
 
         <div className="lg:col-span-7">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            {/* Email Card - Opens Gmail Compose + Copy Button */}
             <a
-              href="mailto:katrinalyndeasis@gmail.com"
-              className="gsap-contact-card p-6 rounded-xl border border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 hover:border-indigo-500/50 transition-all duration-300 hover:-translate-y-1.5 flex flex-col items-center text-center space-y-3 group"
+              href={gmailComposeUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="gsap-contact-card relative p-6 rounded-xl border border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 hover:border-indigo-500/50 transition-all duration-300 hover:-translate-y-1.5 flex flex-col items-center text-center space-y-3 group cursor-pointer"
             >
+              <button
+                onClick={handleCopyEmail}
+                title="Copy email address"
+                className="absolute top-2.5 right-2.5 p-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors cursor-pointer"
+              >
+                {copied ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <Copy className="w-3.5 h-3.5" />}
+              </button>
+
               <div className="w-10 h-10 rounded-full bg-indigo-500/10 text-indigo-500 flex items-center justify-center group-hover:scale-110 transition-transform">
                 <Mail className="w-5 h-5" />
               </div>
               <div>
-                <h3 className="font-bold text-xs uppercase tracking-wider text-slate-900 dark:text-white mb-1 font-mono">Email</h3>
-                <p className="text-xs text-slate-600 dark:text-slate-300 break-all">katrinalyndeasis@gmail.com</p>
+                <h3 className="font-bold text-xs uppercase tracking-wider text-slate-900 dark:text-white mb-1 font-mono">
+                  {copied ? 'Copied!' : 'Email'}
+                </h3>
+                <p className="text-xs text-slate-600 dark:text-slate-300 break-all">{emailAddress}</p>
               </div>
             </a>
 
+            {/* Phone Card */}
             <a
               href="tel:+639290133896"
               className="gsap-contact-card p-6 rounded-xl border border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 hover:border-indigo-500/50 transition-all duration-300 hover:-translate-y-1.5 flex flex-col items-center text-center space-y-3 group"
@@ -58,6 +98,7 @@ export const ContactSection = () => {
               </div>
             </a>
 
+            {/* GitHub Card */}
             <a
               href="https://github.com/kaede-096"
               target="_blank"
